@@ -2,6 +2,7 @@ const { Kode_Mono } = require('next/font/google');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  mode: 'jit',
   content: [
     './app/**/*{js,ts,jsx,tsx}',
     './pages/**/*.{js,tx,jsx,tsx}',
