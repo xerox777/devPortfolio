@@ -33,7 +33,7 @@ function ContactForm() {
                 <div className="" >
                     <Navbar />
 
-                    <div className="max-w-xl mx-auto mt-10 p-8 bg-white shadow-xl rounded-2xl">
+                    <div className="max-w-xl mx-auto mt-10 p-8 bg-white shadow-xl rounded-2xl my-4">
                         <h2 className="text-2xl font-bold mb-6 text-gray-800">Contact Grant</h2>
                         <form ref={form} onSubmit={sendEmail} className="space-y-5">
                             <div>
