@@ -7,7 +7,9 @@
   --background: #ffffff;
   --foreground: #171717;
 }
-
+svg {
+  margin-top: 3px;
+}
 @font-face {
   font-family: 'Kode_Mono';
   src: url('/Kode-Regular.ttf') format('truetype');

@@ -25,7 +25,7 @@ export default function Home() {
     },
     {
       title: 'Full-Stack Developer',
-      company: 'Crosscheck, inc.',
+      company: 'Orgchart Now',
       date: 'Nov 2021 - May 2023',
       description: 'Engineered solutions to bugs on the back-end code base pertaining to different data connectors (SAP XML, Bamboo HR, etc.). Designed & developed new features in react and javascript.',
       skills: ['React', 'Python', 'JavaScript', 'Tailwindcss', 'Chrome Debugger'],
@@ -43,7 +43,7 @@ export default function Home() {
       media: 'CrossCheckHome.mp4',
       title: 'CrossCheck Hub',
       description: 'Full-Stack app built using Java, Springboot, and Thymeleaf.',
-      link: ''
+      link: '/crosscheck_hub'
     },
     {
       media: 'fonseca_poster.jpg',

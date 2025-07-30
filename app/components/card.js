@@ -30,6 +30,7 @@ const Card = ({ media, title, description, link }) => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen]);
+
   return (
     <div className="max-w-sm bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
       {isVideo ?
