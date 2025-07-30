@@ -4,6 +4,7 @@ import Link from "next/link";
 import { BsFillHouseDoorFill } from 'react-icons/bs';
 import Card from '../components/card';
 import Navbar from '../components/navbar';
+
 function Letters() {
     const form = useRef();
 
