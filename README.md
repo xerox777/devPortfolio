@@ -1,5 +1,6 @@
 ![App Demo](public/app_demo.gif)
 
+- navbar copy, visible at localhost:3000/navtest showcases current working responsive hamburger menu implementation.
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

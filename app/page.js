@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
@@ -30,7 +31,7 @@ export default function Home() {
       skills: ['React', 'Python', 'JavaScript', 'Tailwindcss', 'Chrome Debugger'],
     },
     {
-      title: 'Security Software Engineer Inter',
+      title: 'Security Software Engineer Intern',
       company: '23AndMe',
       date: 'May 2019 - Aug 2019',
       description: 'Created canary token/honeypot designed to notify security team when any attempts to authenticate with those credentials were made.',
@@ -59,7 +60,6 @@ export default function Home() {
 
   ];
   return (
-
     // <html>
     <main className="bg-white px-10">
         <div>
@@ -74,7 +74,7 @@ export default function Home() {
 
             <Article key={idx} {...job} />
           ))}
-          <section className='flex flex-row justify-between'>
+          <section className='flex flex-col items-center justify-center text-center space-y-4 md:flex-row md:justify-between md:space-y-5 mb-3 md:items-start'>
             {workCards.map((card, idx) => (
               <Card key={idx} {...card} />
             ))}
