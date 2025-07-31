@@ -33,7 +33,7 @@ function Letters() {
             <section className="min-h-screen  ">
                 <Navbar />
                 <h1 className='text-3xl mx-auto px-7 my-10'>Letters of Recommendation</h1>
-                <div className="flex flex-col lg:flex-row justify-around space-y-5 mb-5" >
+                <div className="flex flex-col lg:flex-row justify-around space-y-5 mb-5 items-center " >
                     {recommendation_letters.map((job, idx) => (
                         <Card key={idx}  {...job} />
                     ))}
