@@ -47,9 +47,9 @@ const Card = ({ media, title, description, link }) => {
       <div className="min-w-screen min-h-screen fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
         onClick={closeModal} >
           <div  className="max-w-4xl max-h-[90vh] p-4"
-            onClick={(e) => e.stopPropagation()}>
+            onClick={closeModal}>
 
-        <img src={selectedImg} alt={title} className="rounded-lg shadow-lg object-contain max-h-[80vh] transform scale-125 transition duration-300" onClick={() => openModal(media)}/>
+        <img onClick={closeModal} src={selectedImg} alt={title} className="rounded-lg shadow-lg object-contain max-h-[80vh] transform scale-125 transition duration-300" onClick={() => openModal(media)}/>
             </div>
 
       </div>
