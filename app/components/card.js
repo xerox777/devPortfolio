@@ -7,7 +7,7 @@ const Card = ({ media, title, description, link }) => {
 
   const openModal = (imgSrc) => {
     setSelectedImg(imgSrc);
-    setIsOpen(true);
+    setIsOpen(!isOpen);
   };
 
   const closeModal = () => {
@@ -49,7 +49,7 @@ const Card = ({ media, title, description, link }) => {
           <div  className="max-w-4xl max-h-[90vh] p-4"
             onClick={closeModal}>
 
-        <img onClick={closeModal} src={selectedImg} alt={title} className="rounded-lg shadow-lg object-contain max-h-[80vh] transform scale-125 transition duration-300" onClick={() => openModal(media)}/>
+        <img  src={selectedImg} alt={title} className="rounded-lg shadow-lg object-contain max-h-[80vh] transform scale-125 transition duration-300" onClick={() => openModal(media)}/>
             </div>
 
       </div>
