@@ -10,21 +10,29 @@ function ContactForm() {
 
     const sendEmail = (e) => {
         e.preventDefault();
-        emailjs.sendForm(
+        const sendtoMe = emailjs.sendForm(
+            process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+            process.env.NEXT_PUBLIC_EMAILJS_EMAILME_TEMP_ID,
+            form.current,
+            process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+        );
+
+        const sendtoUser = emailjs.sendForm(
             process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
             process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
             form.current,
             process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-        ).then(
-            () => {
-                alert("✅ Message sent!");
-                form.current.reset();
-            },
-            (error) => {
-                alert("❌ Failed to send message.");
-                console.error(error);
-            }
         );
+
+        Promise.all([sendtoMe, sendtoUser])
+            .then(() => {
+                alert("✅ Message sent!");
+                form.current.reset(); // ✅ reset *after* both are done
+            })
+            .catch((err) => {
+                console.error("❌ Failed to send message(s):", err);
+                alert("❌ Error sending one or both messages.");
+            });
     };
 
     return (
@@ -35,7 +43,7 @@ function ContactForm() {
 
                     <div className="max-w-xl mx-auto mt-10 p-8 bg-white shadow-xl rounded-2xl my-4">
                         <h2 className="text-2xl font-bold mb-6 text-gray-800">Contact Grant</h2>
-                        <form ref={form} onSubmit={sendEmail} className="space-y-5">
+                        <form ref={form} onSubmit={sendEmail} className="space-y-5" >
                             <div>
                                 <label className="block mb-1 text-sm font-medium text-gray-700">Name</label>
                                 <input
