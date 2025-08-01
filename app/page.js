@@ -70,6 +70,12 @@ export default function Home() {
       title: 'Android App School Project',
       description: 'Security camera application that connected to a raspberry pi hosted webcam through a private twitch url I designed and developed in a school project.',
       link: ''
+    },
+    {
+      media: 'grantfonseca_portfolio.png',
+      title: 'Professional Portfolio',
+      description: 'Portfolio web-app built using Next.js, React, Tailwind css.',
+      link: 'https://github.com/xerox777/devPortfolio'
     }
 
   ];
@@ -88,7 +94,7 @@ export default function Home() {
 
             <Article key={idx} {...job} />
           ))}
-          <section className='flex flex-col items-center justify-center text-center space-y-4 md:flex-row md:justify-between md:space-y-5 mb-3 md:items-start'>
+          <section className='grid grid-cols-1 md:grid-cols-2 gap-20 w-screen mx-auto max-w-fit items-center '>
             {workCards.map((card, idx) => (
               <Card key={idx} {...card} />
             ))}

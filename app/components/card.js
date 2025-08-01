@@ -32,7 +32,7 @@ const Card = ({ media, title, description, link }) => {
   }, [isOpen]);
 
   return (
-    <div className="max-w-sm bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
+    <div className="mx-auto max-w-sm mb-4 bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
       {isVideo ?
       (
         <video src={media}
@@ -46,12 +46,10 @@ const Card = ({ media, title, description, link }) => {
 
       <div className="min-w-screen min-h-screen fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
         onClick={closeModal} >
-          <div  className="max-w-4xl max-h-[90vh] p-4"
+          <div  className=" max-w-screen max-h-[90vh] p-4"
             onClick={closeModal}>
-
-        <img  src={selectedImg} alt={title} className="rounded-lg shadow-lg object-contain max-h-[80vh] transform scale-125 transition duration-300" onClick={() => openModal(media)}/>
+        <img  src={selectedImg} alt={title} className="max-w-full h-auto rounded-lg shadow-lg object-contain max-h-[80vh] transform scale-125 transition duration-300" onClick={() => openModal(media)}/>
             </div>
-
       </div>
       )}
       <div className="p-4">
