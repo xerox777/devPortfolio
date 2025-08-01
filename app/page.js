@@ -72,7 +72,7 @@ export default function Home() {
       link: ''
     },
     {
-      media: 'grantfonseca_portfolio.png',
+      media: 'recursivePortfolio.png',
       title: 'Professional Portfolio',
       description: 'Portfolio web-app built using Next.js, React, Tailwind css.',
       link: 'https://github.com/xerox777/devPortfolio'
