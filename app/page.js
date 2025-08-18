@@ -63,13 +63,13 @@ export default function Home() {
       media: 'fonseca_poster.jpg',
       title: 'Senior Research Project',
       description: 'I worked with my professor, Dr. Gondree, to develop a system of programmatically identifying when capture the flag events took place in a defcon CTF event.',
-      link: ''
+      link: 'https://github.com/xerox777/SeniorResearch'
     },
     {
       media: 'feed.png',
       title: 'Android App School Project',
       description: 'Security camera application that connected to a raspberry pi hosted webcam through a private twitch url I designed and developed in a school project.',
-      link: ''
+      link: 'https://github.com/xerox777/EYASS-SECURITY-ANDROID-APP'
     },
     {
       media: 'recursivePortfolio.png',
@@ -82,24 +82,24 @@ export default function Home() {
   return (
     // <html>
     <main className="bg-white px-10">
-        <div>
-          <Head>
-            <title>Grant Fonseca Portfolio</title>
-            <meta name="description" content="Writen by Grant Fonseca" />
-            <link rel="icon" src="./favicon.ico" />
-          </Head>
-          <Navbar />
-          {/* <h1 className="text-3xl text-teal-500">Grant Fonseca's Portfolio</h1> */}
-          {workExperience.map((job, idx) => (
+      <div>
+        <Head>
+          <title>Grant Fonseca Portfolio</title>
+          <meta name="description" content="Writen by Grant Fonseca" />
+          <link rel="icon" src="./favicon.ico" />
+        </Head>
+        <Navbar />
+        {/* <h1 className="text-3xl text-teal-500">Grant Fonseca's Portfolio</h1> */}
+        {workExperience.map((job, idx) => (
 
-            <Article key={idx} {...job} />
+          <Article key={idx} {...job} />
+        ))}
+        <section className='grid grid-cols-1 md:grid-cols-2 gap-20 w-screen mx-auto max-w-fit items-center '>
+          {workCards.map((card, idx) => (
+            <Card key={idx} {...card} />
           ))}
-          <section className='grid grid-cols-1 md:grid-cols-2 gap-20 w-screen mx-auto max-w-fit items-center '>
-            {workCards.map((card, idx) => (
-              <Card key={idx} {...card} />
-            ))}
-          </section>
-        </div>
+        </section>
+      </div>
     </main>
     // </html>
   );
