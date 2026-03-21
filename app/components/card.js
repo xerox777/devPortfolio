@@ -32,35 +32,37 @@ const Card = ({ media, title, description, link }) => {
   }, [isOpen]);
 
   return (
-    <div className="mx-auto max-w-sm mb-4 bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
-      {isVideo ?
-      (
-        <video src={media}
-        controls
-        className="w-full h-48 object-cover"/>
-      ) : (
-
-        <img src={media} alt={title} className="w-full h-48 object-cover" onClick={() => openModal(media)}/>
-      )}
-      {isOpen && (
-
-      <div className="min-w-screen min-h-screen fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-        onClick={closeModal} >
-          <div  className=" max-w-screen max-h-[90vh] p-4"
-            onClick={closeModal}>
-        <img  src={selectedImg} alt={title} className="max-w-full h-auto rounded-lg shadow-lg object-contain max-h-[80vh] transform scale-125 transition duration-300" onClick={() => openModal(media)}/>
-            </div>
+    <div className="max-w-sm bg-gradient-to-br from-secondary to-primary rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-accent/30 transition-all duration-300 border border-border hover:border-accent group">
+      <div className="relative overflow-hidden bg-gradient-to-br from-primary to-secondary h-48">
+        {isVideo ?
+        (
+          <video src={media}
+          controls
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+        ) : (
+          <img src={media} alt={title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => openModal(media)}/>
+        )}
       </div>
+      {isOpen && (
+        <div className="min-w-screen min-h-screen fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+          onClick={closeModal} >
+            <div  className=" max-w-screen max-h-[90vh] p-4"
+              onClick={closeModal}>
+          <img  src={selectedImg} alt={title} className="max-w-full h-auto rounded-lg shadow-lg object-contain max-h-[80vh] transform scale-125 transition duration-300" onClick={() => openModal(media)}/>
+              </div>
+        </div>
       )}
-      <div className="p-4">
-        <h3 className="text-lg font-bold text-gray-900">{title}</h3>
-        <p className="mt-2 text-gray-600 text-sm">{description}</p>
+      <div className="p-6">
+        <h3 className="text-lg font-bold text-text-primary group-hover:text-accent transition-colors duration-300 mb-2">
+          {title}
+        </h3>
+        <p className="text-text-secondary text-sm mb-4 leading-relaxed">{description}</p>
         {link && (
           <a
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block mt-3 text-blue-600 hover:underline text-sm font-medium"
+            className="inline-flex items-center gap-2 text-accent hover:text-accent-light font-semibold text-sm transition-colors duration-300"
           >
             View Project →
           </a>

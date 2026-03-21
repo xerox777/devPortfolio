@@ -4,12 +4,21 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #0f172a;
+  --secondary: #1e293b;
+  --accent: #3b82f6;
+  --accent-light: #60a5fa;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --border: #334155;
+  --background: #0f172a;
+  --foreground: #f1f5f9;
 }
+
 svg {
   margin-top: 3px;
 }
+
 @font-face {
   font-family: 'Kode_Mono';
   src: url('/Kode-Regular.ttf') format('truetype');
@@ -17,6 +26,7 @@ svg {
   font-style: normal;
   font-display: swap;
 }
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -24,15 +34,59 @@ svg {
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: var(--text-primary);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-light);
+}
+
+/* Carousel animations */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes scroll-left-reverse {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
+
+.carousel-scroll {
+  animation: scroll-left 20s linear infinite;
+}
+
+.carousel-scroll:hover {
+  animation-play-state: paused;
+}
+
+.carousel-scroll-reverse {
+  animation: scroll-left-reverse 20s linear infinite;
+}
+

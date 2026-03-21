@@ -54,6 +54,12 @@ export default function Home() {
   ];
   const workCards = [
     {
+      media: 'pulse_consult_booking_page.png',
+      title: 'Pulse Consult',
+      description: 'Full-Stack app built using Ruby on Rails, Postgresql, Docker, and Tailwind CSS. The app is a booking platform.',
+      link: 'https://www.pulseconsultme.com/'
+    },
+    {
       media: 'CrossCheckHome.mp4',
       title: 'CrossCheck Hub',
       description: 'Full-Stack app built using Java, Springboot, and Thymeleaf.',
@@ -80,27 +86,145 @@ export default function Home() {
 
   ];
   return (
-    // <html>
-    <main className="bg-white px-10">
-      <div>
-        <Head>
-          <title>Grant Fonseca Portfolio</title>
-          <meta name="description" content="Writen by Grant Fonseca" />
-          <link rel="icon" src="./favicon.ico" />
-        </Head>
-        <Navbar />
-        {/* <h1 className="text-3xl text-teal-500">Grant Fonseca's Portfolio</h1> */}
-        {workExperience.map((job, idx) => (
+    <main className="min-h-screen bg-gradient-to-br from-primary via-secondary to-primary">
+      <Head>
+        <title>Grant Fonseca Portfolio</title>
+        <meta name="description" content="Written by Grant Fonseca" />
+        <link rel="icon" src="./favicon.ico" />
+      </Head>
+      <Navbar />
+      
+      {/* Hero Section */}
+      <section className="py-20 px-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div className="space-y-6">
+            <h1 className="text-5xl md:text-6xl font-bold text-text-primary mb-4">
+              Grant Fonseca
+            </h1>
+            <p className="text-2xl md:text-3xl font-semibold text-accent mb-2">
+              Full-Stack Software Engineer
+            </p>
+            <p className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-3xl mb-8">
+              Building scalable solutions with Python, React, Ruby on Rails, and modern web technologies.
+              Passionate about solving complex problems and delivering business value through code.
+            </p>
+            <div className="flex gap-4 flex-wrap">
+              <a href="/contactme" className="px-8 py-3 bg-accent hover:bg-accent-light text-primary font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
+                Get In Touch
+              </a>
+              <a href="#projects" className="px-8 py-3 border-2 border-accent text-accent hover:bg-accent/10 font-semibold rounded-lg transition-all duration-300">
+                View Work
+              </a>
+            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-3xl overflow-hidden border border-border shadow-xl shadow-accent/20">
+              <Image
+                src="/Grant-profesh.jpg"
+                alt="Grant Fonseca"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <Article key={idx} {...job} />
-        ))}
-        <section className='grid grid-cols-1 md:grid-cols-2 gap-20 w-screen mx-auto max-w-fit items-center '>
-          {workCards.map((card, idx) => (
-            <Card key={idx} {...card} />
+      {/* Company Carousel Section */}
+      <section className="py-16 px-10 bg-secondary/50 backdrop-blur-sm border-t border-border overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-text-primary mb-12 text-center">
+            Companies I've Worked With
+          </h2>
+          <div className="relative overflow-hidden h-40">
+            <div className="carousel-scroll flex gap-12">
+              {[
+                { name: '23andMe', logo: '/23andme-logo.svg', url: 'https://23andme.com' },
+                { name: 'OrgChart Now', logo: '/orgchart-logo.png', url: 'https://theorgchart.com' },
+                { name: 'Crosscheck', logo: '/cross-check.webp', url: 'https://www.cross-check.com' },
+                { name: 'Valorx', logo: '/valorx-logo.svg', url: 'https://valorx.com' },
+                { name: 'City of Santa Rosa', logo: '/santa-rosa-logo.png', url: 'https://srcity.org' }
+              ].map((company) => (
+                <a
+                  key={company.name}
+                  href={company.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-shrink-0 w-48 h-32 group"
+                >
+                  <div className="h-full bg-gradient-to-br from-secondary to-primary border border-border rounded-xl p-6 flex flex-col items-center justify-center hover:border-accent hover:shadow-lg hover:shadow-accent/20 transition-all duration-300 cursor-pointer">
+                    <div className="relative w-24 h-20 mb-2 group-hover:scale-110 transition-transform duration-300">
+                      <Image
+                        src={company.logo}
+                        alt={company.name}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <p className="text-text-primary font-semibold text-center text-sm group-hover:text-accent transition-colors duration-300">
+                      {company.name}
+                    </p>
+                  </div>
+                </a>
+              ))}
+              {[
+                { name: '23andMe', logo: '/23andme-logo.svg', url: 'https://23andme.com' },
+                { name: 'OrgChart Now', logo: '/orgchart-logo.png', url: 'https://orgchart.today' },
+                { name: 'Crosscheck', logo: '/cross-check.webp', url: 'https://crosscheckme.com' },
+                { name: 'Valorx', logo: '/valorx-logo.svg', url: 'https://valorx.com' }
+              ].map((company) => (
+                <a
+                  key={`${company.name}-duplicate`}
+                  href={company.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-shrink-0 w-48 h-32 group"
+                >
+                  <div className="h-full bg-gradient-to-br from-secondary to-primary border border-border rounded-xl p-6 flex flex-col items-center justify-center hover:border-accent hover:shadow-lg hover:shadow-accent/20 transition-all duration-300 cursor-pointer">
+                    <div className="relative w-24 h-20 mb-2 group-hover:scale-110 transition-transform duration-300">
+                      <Image
+                        src={company.logo}
+                        alt={company.name}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <p className="text-text-primary font-semibold text-center text-sm group-hover:text-accent transition-colors duration-300">
+                      {company.name}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Work Experience Section */}
+      <section className="py-16 px-10 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-text-primary mb-12">
+          Experience
+        </h2>
+        <div className="space-y-6">
+          {workExperience.map((job, idx) => (
+            <Article key={idx} {...job} />
           ))}
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-16 px-10 bg-secondary/50 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-text-primary mb-12">
+            Featured Projects
+          </h2>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+            {workCards.map((card, idx) => (
+              <Card key={idx} {...card} />
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
-    // </html>
   );
 }

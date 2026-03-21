@@ -4,23 +4,30 @@ import Link from "next/link";
 
 const Article = ({ title, company, date, description, skills }) => {
   return (
-    <article className="mb-6 p-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-      <h3 className="text-xl font-bold text-gray-900">{title}</h3>
-      <p className="text-gray-700 font-medium">
-        {company} <span className="text-sm text-gray-500">| {date}</span>
-      </p>
-      <p className="mt-2 text-gray-600">{description}</p>
+    <article className="p-6 bg-gradient-to-br from-secondary to-primary rounded-xl border border-border hover:border-accent transition-all duration-300 hover:shadow-xl hover:shadow-accent/20 group">
+      <div className="flex justify-between items-start mb-4 flex-wrap gap-2">
+        <div>
+          <h3 className="text-2xl font-bold text-text-primary group-hover:text-accent transition-colors duration-300">
+            {title}
+          </h3>
+          <p className="text-accent font-semibold mt-1">{company}</p>
+        </div>
+        <span className="text-xs bg-primary px-3 py-1 rounded-full text-text-secondary font-medium border border-border">
+          {date}
+        </span>
+      </div>
+      <p className="text-text-secondary mb-4 leading-relaxed">{description}</p>
       {skills && skills.length > 0 && (
-        <ul className="mt-3 flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2">
           {skills.map((skill, index) => (
-            <li
+            <span
               key={index}
-              className="text-sm bg-gray-100 text-gray-800 px-2 py-1 rounded"
+              className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full border border-accent/30 font-medium hover:bg-accent/20 transition-colors duration-300"
             >
               {skill}
-            </li>
+            </span>
           ))}
-        </ul>
+        </div>
       )}
     </article>
   );

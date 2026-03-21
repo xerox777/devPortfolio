@@ -36,53 +36,53 @@ function ContactForm() {
     };
 
     return (
-        <main className="bg-white px-10">
-            <section className="min-h-screen  ">
-                <div className="" >
+        <main className="min-h-screen bg-gradient-to-br from-primary via-secondary to-primary px-10">
+            <section className="min-h-screen">
+                <div>
                     <Navbar />
 
-                    <div className="max-w-xl mx-auto mt-10 p-8 bg-white shadow-xl rounded-2xl my-4">
-                        <h2 className="text-2xl font-bold mb-6 text-gray-800">Contact Grant</h2>
+                    <div className="max-w-xl mx-auto mt-10 p-8 bg-gradient-to-br from-secondary to-primary border border-border shadow-lg shadow-accent/20 rounded-2xl my-4">
+                        <h2 className="text-2xl font-bold mb-6 text-text-primary">Contact Grant</h2>
                         <form ref={form} onSubmit={sendEmail} className="space-y-5" >
                             <div>
-                                <label className="block mb-1 text-sm font-medium text-gray-700">Name</label>
+                                <label className="block mb-1 text-sm font-medium text-text-primary">Name</label>
                                 <input
                                     type="text"
                                     name="user_name"
                                     required
-                                    className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full border border-border bg-primary/50 text-text-primary rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-accent placeholder-text-secondary/50"
                                 />
                             </div>
                             <div>
-                                <label className="block mb-1 text-sm font-medium text-gray-700">Email</label>
+                                <label className="block mb-1 text-sm font-medium text-text-primary">Email</label>
                                 <input
                                     type="email"
                                     name="to_email"
                                     required
-                                    className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full border border-border bg-primary/50 text-text-primary rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-accent placeholder-text-secondary/50"
                                 />
                             </div>
                             <div>
-                                <label className="block mb-1 text-sm font-medium text-gray-700">Title</label>
+                                <label className="block mb-1 text-sm font-medium text-text-primary">Title</label>
                                 <input
                                     type="text"
                                     name="title"
                                     required
-                                    className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full border border-border bg-primary/50 text-text-primary rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-accent placeholder-text-secondary/50"
                                 />
                             </div>
                             <div>
-                                <label className="block mb-1 text-sm font-medium text-gray-700">Message</label>
+                                <label className="block mb-1 text-sm font-medium text-text-primary">Message</label>
                                 <textarea
                                     name="message"
                                     rows="5"
                                     required
-                                    className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                                    className="w-full border border-border bg-primary/50 text-text-primary rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-accent placeholder-text-secondary/50 resize-none"
                                 />
                             </div>
                             <button
                                 type="submit"
-                                className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition"
+                                className="w-full bg-accent hover:bg-accent-light text-primary font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
                             >
                                 Send Message
                             </button>
