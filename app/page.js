@@ -171,7 +171,8 @@ export default function Home() {
                 { name: '23andMe', logo: '/23andme-logo.svg', url: 'https://23andme.com' },
                 { name: 'OrgChart Now', logo: '/orgchart-logo.png', url: 'https://orgchart.today' },
                 { name: 'Crosscheck', logo: '/cross-check.webp', url: 'https://crosscheckme.com' },
-                { name: 'Valorx', logo: '/valorx-logo.svg', url: 'https://valorx.com' }
+                { name: 'Valorx', logo: '/valorx-logo.svg', url: 'https://valorx.com' },
+                { name: 'City of Santa Rosa', logo: '/santa-rosa-logo.png', url: 'https://srcity.org' }
               ].map((company) => (
                 <a
                   key={`${company.name}-duplicate`}

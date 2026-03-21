@@ -78,15 +78,68 @@ body {
   }
 }
 
+/* Main carousel scroll */
 .carousel-scroll {
-  animation: scroll-left 20s linear infinite;
+  display: flex;            /* arrange logos horizontally */
+  width: max-content;       /* allow content to extend horizontally */
+  animation: scroll-left 25s linear infinite;
 }
 
 .carousel-scroll:hover {
   animation-play-state: paused;
 }
 
+/* Reverse scroll (optional) */
 .carousel-scroll-reverse {
-  animation: scroll-left-reverse 20s linear infinite;
+  display: flex;
+  width: max-content;
+  animation: scroll-left-reverse 25s linear infinite;
 }
 
+/* Ensure logos don’t shrink */
+.carousel-scroll > *,
+.carousel-scroll-reverse > * {
+  flex-shrink: 0;
+}
+
+/* Keyframes for left scroll */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Keyframes for reverse scroll */
+@keyframes scroll-left-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Tablet carousel speed */
+@media (max-width: 1024px) {
+  .carousel-scroll {
+    animation: scroll-left 20s linear infinite;
+  }
+
+  .carousel-scroll-reverse {
+    animation: scroll-left-reverse 20s linear infinite;
+  }
+}
+
+/* Mobile carousel speed */
+@media (max-width: 768px) {
+  .carousel-scroll {
+    animation: scroll-left 15s linear infinite;
+  }
+
+  .carousel-scroll-reverse {
+    animation: scroll-left-reverse 15s linear infinite;
+  }
+}
