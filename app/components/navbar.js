@@ -1,7 +1,7 @@
 // components/Navbar.js
 "use client";
 import React from 'react';
-import { BsBook, BsLinkedin, BsGithub, BsFileEarmarkPdfFill, BsFillHouseDoorFill, BsMailbox2Flag } from 'react-icons/bs';
+import { BsBook, BsLinkedin, BsGithub, BsFileEarmarkPdfFill, BsFillHouseDoorFill, BsMailbox2Flag, BsGrid } from 'react-icons/bs';
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from 'react';
@@ -24,6 +24,13 @@ const Navbar = () => {
                             <Link href="/" className="flex items-center gap-2 relative inline-block group">
                                 <BsFillHouseDoorFill className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 <span className="text-text-primary text-base font-medium">Home</span>
+                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
+                            </Link>
+                        </li>
+                        <li className="list-none">
+                            <Link href="/#services" className="flex items-center gap-2 relative group">
+                                <BsGrid className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" />
+                                <span className="text-text-primary text-base font-medium">Services</span>
                                 <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
                             </Link>
                         </li>
@@ -52,13 +59,16 @@ const Navbar = () => {
                 </ul>
                 <span className="flex flex-row gap-8 items-center list-none">
                     <li className="list-none"><Link href="https://www.linkedin.com/in/grant-fonseca-5504b590/" target="_blank" className="relative inline-block group"> <BsLinkedin className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" />
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
                     </Link></li>
                     <li><Link href="https://github.com/xerox777" target="_blank" className="relative inline-block group"><BsGithub className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" /><span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span> </Link></li>
                 </span>
             </nav>
 
-            <nav className={`${menu ? 'min-h-screen' : 'min-h-12'} lg:hidden flex items-center justify-center shadow-lg py-6 mb-12 px-4 flex-col space-y-9 duration-300 ease-in-out transition-all bg-gradient-to-r from-secondary to-primary border-b border-border`}>
+            <nav className={`${menu ? 'min-h-screen' : 'min-h-12'} lg:hidden flex items-center justify-center shadow-lg py-6 mb-12 px-4 flex-col space-y-9 duration-300 ease-in-out transition-all bg-gradient-to-r from-secondary to-primary border-b border-border `} style={{
+                paddingBottom: '3rem', // React style uses camelCase, no !important
+                cursor: 'auto',
+            }}>
                 {menu ? (
                     <X size={25} onClick={toggleMenu} className="cursor-pointer absolute top-5 left-18 text-text-primary hover:text-accent transition-colors" />
                 ) : (
@@ -76,6 +86,13 @@ const Navbar = () => {
                             <Link href="/" className="flex items-center gap-2 text-text-primary font-medium relative group">
                                 <BsFillHouseDoorFill className="text-xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 Home
+                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
+                            </Link>
+                        </span>
+                        <span className="flex mx-3 gap-3 items-center justify-center">
+                            <Link href="/#services" className="flex items-center gap-2 text-text-primary font-medium relative group">
+                                <BsGrid className="text-xl text-text-primary group-hover:text-accent transition-colors duration-300" />
+                                Services
                                 <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
                             </Link>
                         </span>
