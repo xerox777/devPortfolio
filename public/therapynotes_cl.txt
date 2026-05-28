@@ -1,0 +1,21 @@
+Grant Fonseca
+Rohnert Park, CA | grantnfonseca@outlook.com | (707) 326-4959 | grantfonseca.com
+
+---
+
+Dear TherapyNotes Hiring Team,
+
+I'm excited to apply for the Senior Software Developer position at TherapyNotes. Building software that directly supports mental health professionals is exactly the kind of meaningful, high-impact work I'm looking for — and your stack aligns closely with the full-stack, service-oriented development I've been doing throughout my career.
+
+Over the past 5+ years, I've built and owned features across the entire stack in production environments serving real users and real business outcomes. At the City of Santa Rosa, I engineered a full-stack C# web application with a REST API layer and custom access controls that eliminated hours of manual data entry for city staff. I also architected a microservices-based system integration using Python and REST APIs to enable automated bidirectional data exchange between two enterprise asset management platforms — a project that required the same focus on scalability, reliability, and clean API design that your SOA and event-driven architecture demands.
+
+At OrgChartNow, I built and shipped React components for a SaaS product generating $10M+ in annual revenue, developed user-action tracking systems to surface behavioral data for product decisions, and owned critical production defects from root-cause analysis through regression coverage. That end-to-end ownership mentality — caring about what happens after the code ships — is something I carry into every role.
+
+Mentorship is also a natural part of how I work. I'm currently guiding a junior developer through system architecture, API design patterns, and Python best practices on a live enterprise integration — and I'd welcome the opportunity to contribute to a growing engineering team at TherapyNotes in the same way.
+
+I'll be transparent: my frontend production experience is primarily in React rather than Angular. That said, the architectural patterns — component-based design, state management, TypeScript, data binding — transfer directly, and I'm confident I can get up to speed on Angular quickly given my existing depth in the JavaScript ecosystem and my track record of adapting to new technologies on the job.
+
+I'd love to bring my full-stack experience, service-oriented architecture background, and genuine enthusiasm for purposeful software to your team. Thank you for your consideration — I look forward to the opportunity to connect.
+
+Sincerely,
+Grant Fonseca
