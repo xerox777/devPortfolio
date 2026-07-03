@@ -1,20 +1,22 @@
 "use client";
-import Image from "next/image";
-import Head from "next/head";
-import Navbar from '../components/navbar';
+import dynamic from "next/dynamic";
+import Navbar from "../components/navbar";
+
+// pdfjs-dist relies on browser-only APIs (e.g. DOMMatrix), so this must never
+// be rendered during SSR.
+const ResumeViewer = dynamic(() => import("./resumeViewer"), {
+  ssr: false,
+  loading: () => (
+    <div className="p-10 text-center text-text-secondary">Loading resume…</div>
+  ),
+});
 
 export default function PDFViewer() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-primary via-secondary to-primary px-10">
-      <section className="min-h-screen">
+      <section className="min-h-screen pb-16">
         <Navbar />
-        <div className="w-full h-screen rounded-xl overflow-hidden border border-border shadow-lg shadow-accent/20">
-          <iframe
-            src="/GrantFonsecaResume.pdf"
-            className="w-full h-full"
-            title="PDF Viewer"
-          />
-        </div>
+        <ResumeViewer />
       </section>
     </main>
   );
