@@ -284,6 +284,12 @@ export default function Home() {
               >
                 View Work
               </a>
+              <a
+                href="#project-experience"
+                className="px-8 py-3 border-2 border-accent text-accent hover:bg-accent/10 font-semibold rounded-lg transition-all duration-300"
+              >
+                View Projects
+              </a>
             </div>
           </div>
 

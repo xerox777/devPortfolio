@@ -24,44 +24,44 @@ const Navbar = () => {
                             <Link href="/" className="flex items-center gap-2 relative inline-block group">
                                 <BsFillHouseDoorFill className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 <span className="text-text-primary text-base font-medium">Home</span>
-                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
+                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
                             </Link>
                         </li>
                         <li className="list-none">
                             <Link href="/#services" className="flex items-center gap-2 relative group">
                                 <BsGrid className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 <span className="text-text-primary text-base font-medium">Services</span>
-                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
+                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
                             </Link>
                         </li>
                         <li className="list-none">
                             <Link href="/letters" className="flex items-center gap-2 relative inline-block group">
                                 <BsBook className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 <span className="text-text-primary text-base font-medium">Letters</span>
-                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
+                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
                             </Link>
                         </li>
                         <li className="list-none">
                             <Link href="/resume" className="flex items-center gap-2 relative inline-block group">
                                 <BsFileEarmarkPdfFill className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 <span className="text-text-primary text-base font-medium">Resume</span>
-                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
+                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
                             </Link>
                         </li>
                         <li className="list-none">
                             <Link href="/contactme" className="flex items-center gap-2 relative inline-block group">
                                 <BsMailbox2Flag className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 <span className="text-text-primary text-base font-medium">Contact</span>
-                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
+                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
                             </Link>
                         </li>
                     </span>
                 </ul>
                 <span className="flex flex-row gap-8 items-center list-none">
                     <li className="list-none"><Link href="https://www.linkedin.com/in/grant-fonseca-5504b590/" target="_blank" className="relative inline-block group"> <BsLinkedin className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" />
-                        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                        <span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
                     </Link></li>
-                    <li><Link href="https://github.com/xerox777" target="_blank" className="relative inline-block group"><BsGithub className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" /><span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span> </Link></li>
+                    <li><Link href="https://github.com/xerox777" target="_blank" className="relative inline-block group"><BsGithub className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" /><span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span> </Link></li>
                 </span>
             </nav>
 
@@ -80,41 +80,41 @@ const Navbar = () => {
     lg:hidden flex flex-col absolute top-16 font-semibold text-base text-center pt-8 pb-4 gap-6
   `}>
                     <div className="flex flex-col w-full space-y-4">
-                        <span className="flex mx-3"><li><Link href="https://www.linkedin.com/in/grant-fonseca-5504b590/" target="_blank" className="relative inline-block group"> <BsLinkedin className="text-2xl mx-1 text-text-primary group-hover:text-accent transition-colors duration-300" /><span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span></Link></li> </span>
-                        <span className="flex mx-3"><li><Link href="https://github.com/xerox777" target="_blank" className="relative inline-block group"><BsGithub className="text-2xl mx-1 text-text-primary group-hover:text-accent transition-colors duration-300" /><span className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span> </Link></li></span>
+                        <span className="flex mx-3"><li><Link href="https://www.linkedin.com/in/grant-fonseca-5504b590/" target="_blank" className="relative inline-block group"> <BsLinkedin className="text-2xl mx-1 text-text-primary group-hover:text-accent transition-colors duration-300" /><span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span></Link></li> </span>
+                        <span className="flex mx-3"><li><Link href="https://github.com/xerox777" target="_blank" className="relative inline-block group"><BsGithub className="text-2xl mx-1 text-text-primary group-hover:text-accent transition-colors duration-300" /><span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span> </Link></li></span>
                         <span className="flex mx-3 gap-3 items-center justify-center">
                             <Link href="/" className="flex items-center gap-2 text-text-primary font-medium relative group">
                                 <BsFillHouseDoorFill className="text-xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 Home
-                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
+                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
                             </Link>
                         </span>
                         <span className="flex mx-3 gap-3 items-center justify-center">
                             <Link href="/#services" className="flex items-center gap-2 text-text-primary font-medium relative group">
                                 <BsGrid className="text-xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 Services
-                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
+                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
                             </Link>
                         </span>
                         <span className="flex mx-3 gap-3 items-center justify-center">
                             <Link href="/letters" className="flex items-center gap-2 text-text-primary font-medium relative group">
                                 <BsBook className="text-xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 Letters
-                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
+                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
                             </Link>
                         </span>
                         <span className="flex mx-3 gap-3 items-center justify-center">
                             <Link href="/resume" className="flex items-center gap-2 text-text-primary font-medium relative group">
                                 <BsFileEarmarkPdfFill className="text-xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 Resume
-                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
+                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
                             </Link>
                         </span>
                         <span className="flex mx-3 gap-3 items-center justify-center">
                             <Link href="/contactme" className="flex items-center gap-2 text-text-primary font-medium relative group">
                                 <BsMailbox2Flag className="text-xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 Contact
-                                <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
+                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
                             </Link>
                         </span>
                     </div>
