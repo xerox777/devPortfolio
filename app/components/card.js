@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const Card = ({ media, title, description, link }) => {
+const Card = ({ media, title, description, link, icon: Icon }) => {
   const isVideo = media?.endsWith('.mp4');
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImg, setSelectedImg] = useState("");
@@ -34,13 +34,18 @@ const Card = ({ media, title, description, link }) => {
   return (
     <div className="max-w-sm bg-gradient-to-br from-secondary to-primary rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-accent/30 transition-all duration-300 border border-border hover:border-accent group">
       <div className="relative overflow-hidden bg-gradient-to-br from-primary to-secondary h-48">
-        {isVideo ?
-        (
-          <video src={media}
-          controls
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+        {media ? (
+          isVideo ? (
+            <video src={media}
+            controls
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+          ) : (
+            <img src={media} alt={title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => openModal(media)}/>
+          )
         ) : (
-          <img src={media} alt={title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => openModal(media)}/>
+          <div className="w-full h-full flex items-center justify-center">
+            {Icon && <Icon className="text-6xl text-accent/40" />}
+          </div>
         )}
       </div>
       {isOpen && (

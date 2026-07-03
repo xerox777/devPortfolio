@@ -12,6 +12,7 @@ import {
   BsDatabase,
   BsShieldCheck,
   BsCalendarEvent,
+  BsAwardFill,
 } from 'react-icons/bs';
 
 export default function Home() {
@@ -93,6 +94,34 @@ export default function Home() {
       description: 'Portfolio web-app built using Next.js, React, Tailwind css.',
       link: 'https://github.com/xerox777/devPortfolio'
     }
+  ];
+
+  const projectExperience = [
+    {
+      icon: BsRobot,
+      title: 'AI Agent Tool Server (MCP)',
+      description: "Built a Model Context Protocol (MCP) server exposing custom AI-agent tools — automated email drafting/sending and an intelligent multi-attendee meeting scheduler that infers attendees' working hours from calendar history via Outlook COM automation — over Streamable HTTP so the department's FME ETL platform can invoke LLM-driven automation as native pipeline steps.",
+    },
+    {
+      media: '/unionfind_frontend.png',
+      title: 'Downstream Asset Impact Analyzer',
+      description: 'C#/Python web app powered by a Union-Find (disjoint-set, union-by-rank with path compression) graph engine that ranks utility assets by direct/indirect downstream dependency count, surfacing the highest-impact assets before field crews perform replacements.',
+    },
+    {
+      media: '/shortest_wo_path_webapp.png',
+      title: 'Work Order Route Optimizer',
+      description: 'ASP.NET Core + Python API combining Dijkstra shortest-path search with TSP heuristics (nearest-neighbor construction plus 2-opt refinement) over OSMnx/NetworkX road-network graphs, generating optimized multi-stop routes and one-click Google Maps links for field technicians.',
+    },
+    {
+      media: '/cis_cw_dashboard.png',
+      title: 'CIS/Cityworks Integration Support Tool',
+      description: 'Full-stack C#/Python web app enabling bi-directional data transfer between the CIS and Cityworks asset management platforms — SQLite-based transaction parsing, subprocess-isolated Python execution, and automated meter/service-order reprocessing.',
+    },
+    {
+      icon: BsAwardFill,
+      title: 'Kudos of the Month',
+      description: 'C#/.NET MVC employee-recognition web app with a generic authenticated API-proxy layer for secure cross-origin service calls.',
+    },
   ];
 
   const services = [
@@ -312,6 +341,22 @@ export default function Home() {
           {workExperience.map((job, idx) => (
             <div key={idx} className="scroll-reveal" style={{ transitionDelay: `${idx * 60}ms` }}>
               <Article {...job} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Project Experience ─────────────────────────────── */}
+      <section id="project-experience" className="py-16 px-10 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-text-primary mb-4 scroll-reveal">Project Experience</h2>
+        <p className="text-text-secondary mb-12 max-w-3xl scroll-reveal">
+          Internal tools designed and built while at the City of Santa Rosa — covering AI-agent automation,
+          graph algorithms, and enterprise systems integration.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projectExperience.map((project, idx) => (
+            <div key={idx} className="scroll-reveal" style={{ transitionDelay: `${idx * 80}ms` }}>
+              <Card {...project} />
             </div>
           ))}
         </div>
