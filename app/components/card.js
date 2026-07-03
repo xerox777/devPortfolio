@@ -1,35 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import { createPortal } from 'react-dom';
+import { X } from 'lucide-react';
+import useModalTransition from './useModalTransition';
 
 const Card = ({ media, title, description, link, icon: Icon }) => {
   const isVideo = media?.endsWith('.mp4');
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedImg, setSelectedImg] = useState("");
+  const isZoomable = media && !isVideo;
+  const { isOpen, visible, open, close } = useModalTransition();
 
-  const openModal = (imgSrc) => {
-    setSelectedImg(imgSrc);
-    setIsOpen(!isOpen);
+  const openModal = () => {
+    if (isZoomable) open();
   };
-
-  const closeModal = () => {
-    setIsOpen(false);
-    setSelectedImg("");
-  };
-  // 🔑 Handle Escape key
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        closeModal();
-      }
-    };
-
-    if (isOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen]);
 
   return (
     <div className="max-w-sm bg-gradient-to-br from-secondary to-primary rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-accent/30 transition-all duration-300 border border-border hover:border-accent group">
@@ -40,7 +21,12 @@ const Card = ({ media, title, description, link, icon: Icon }) => {
             controls
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
           ) : (
-            <img src={media} alt={title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => openModal(media)}/>
+            <img
+              src={media}
+              alt={title}
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-zoom-in"
+              onClick={openModal}
+            />
           )
         ) : (
           <div className="w-full h-full flex items-center justify-center">
@@ -48,15 +34,6 @@ const Card = ({ media, title, description, link, icon: Icon }) => {
           </div>
         )}
       </div>
-      {isOpen && (
-        <div className="min-w-screen min-h-screen fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-          onClick={closeModal} >
-            <div  className=" max-w-screen max-h-[90vh] p-4"
-              onClick={closeModal}>
-          <img  src={selectedImg} alt={title} className="max-w-full h-auto rounded-lg shadow-lg object-contain max-h-[80vh] transform scale-125 transition duration-300" onClick={() => openModal(media)}/>
-              </div>
-        </div>
-      )}
       <div className="p-6">
         <h3 className="text-lg font-bold text-text-primary group-hover:text-accent transition-colors duration-300 mb-2">
           {title}
@@ -73,6 +50,28 @@ const Card = ({ media, title, description, link, icon: Icon }) => {
           </a>
         )}
       </div>
+
+      {isOpen && typeof document !== 'undefined' && createPortal(
+        <div
+          className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 sm:p-8 transition-opacity duration-200 ease-out ${visible ? 'opacity-100' : 'opacity-0'}`}
+          onClick={close}
+        >
+          <button
+            onClick={close}
+            aria-label="Close"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 flex items-center justify-center bg-secondary/90 hover:bg-secondary border border-border hover:border-accent rounded-full text-text-primary transition-colors duration-200"
+          >
+            <X size={20} />
+          </button>
+          <img
+            src={media}
+            alt={title}
+            onClick={(e) => e.stopPropagation()}
+            className={`max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain transition-transform duration-200 ease-out ${visible ? 'scale-100' : 'scale-95'}`}
+          />
+        </div>,
+        document.body
+      )}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/navbar';
 import Article from './components/article';
 import Card from './components/card';
+import ProjectCard from './components/projectCard';
 import { X } from 'lucide-react';
 import {
   BsRobot,
@@ -100,27 +101,91 @@ export default function Home() {
     {
       icon: BsRobot,
       title: 'AI Agent Tool Server (MCP)',
+      tagline: "Model Context Protocol server exposing AI-agent tools to the department's FME automation platform",
       description: "Built a Model Context Protocol (MCP) server exposing custom AI-agent tools — automated email drafting/sending and an intelligent multi-attendee meeting scheduler that infers attendees' working hours from calendar history via Outlook COM automation — over Streamable HTTP so the department's FME ETL platform can invoke LLM-driven automation as native pipeline steps.",
+      images: [],
+      mechanics: [
+        "Runs a FastMCP server over Streamable HTTP so any MCP-compatible host (like FME's MCP Caller) can discover and invoke tools as regular pipeline steps, with no custom client required.",
+        'Exposes send_outlook_email and create_meeting tools that drive the Windows Outlook COM API from a background STA thread, keeping each MCP request non-blocking so callers never hit a timeout waiting on desktop automation.',
+        "create_meeting infers each attendee's real working hours by pulling 14 days of calendar history via GetSharedDefaultFolder, computing the median start/end time per person, then intersecting every attendee's window to find the first mutually free slot.",
+        'Automatically finds an open local port and writes full request/response tracing to a debug log for troubleshooting COM automation issues in production.',
+      ],
+      impact: [
+        'Turns Outlook scheduling — normally manual back-and-forth — into a single natural-language request an LLM agent can fulfill end-to-end.',
+        "Gives the department's FME ETL pipelines a way to trigger AI-driven actions as native steps, without bespoke integration code per workflow.",
+        'Establishes a reusable pattern (MCP server + COM automation) for exposing desktop-bound enterprise tools to LLM agents going forward.',
+      ],
+      stack: ['Python', 'Model Context Protocol', 'FastMCP', 'Streamable HTTP', 'Outlook COM Automation', 'Threading'],
     },
     {
-      media: '/unionfind_frontend.png',
       title: 'Downstream Asset Impact Analyzer',
+      tagline: 'Graph-based tool that ranks utility assets by cascading downstream impact',
       description: 'C#/Python web app powered by a Union-Find (disjoint-set, union-by-rank with path compression) graph engine that ranks utility assets by direct/indirect downstream dependency count, surfacing the highest-impact assets before field crews perform replacements.',
+      images: ['/unionfind_frontend.png', '/unionfind_datastructure.png'],
+      mechanics: [
+        'Implements a Union-Find (disjoint-set) data structure from scratch in Python, using union-by-rank and path compression so find() operations run in near-constant time even on large asset graphs.',
+        'A C# ASP.NET Core front end collects a user-defined asset graph and posts it to an API, which shells out to the Python engine and streams the JSON result back.',
+        'The engine unions every asset with its direct dependencies, then groups all assets sharing a root into connected components — each component represents everything that would be affected if one asset in it failed.',
+        'Users can filter by asset type and request the top-K highest-impact components, so field teams see which assets have the largest blast radius before scheduling replacement work.',
+      ],
+      impact: [
+        "Surfaces hidden dependency chains that aren't obvious from a flat asset list, so crews can prioritize replacements that would otherwise cause the most downstream service disruption.",
+        'Replaces manual, error-prone tracing of asset dependency chains with an instant, repeatable graph computation.',
+        'Generalizes to any asset type via a user-configurable schema, so the same tool covers multiple asset categories.',
+      ],
+      stack: ['C#', 'ASP.NET Core', 'Python', 'Union-Find / Disjoint-Set', 'Graph Algorithms', 'REST API'],
     },
     {
-      media: '/shortest_wo_path_webapp.png',
       title: 'Work Order Route Optimizer',
+      tagline: 'Route-optimization API that plans the fastest multi-stop path across open work orders',
       description: 'ASP.NET Core + Python API combining Dijkstra shortest-path search with TSP heuristics (nearest-neighbor construction plus 2-opt refinement) over OSMnx/NetworkX road-network graphs, generating optimized multi-stop routes and one-click Google Maps links for field technicians.',
+      images: ['/shortest_wo_path_webapp.png', '/shortest_wo_path_route.png'],
+      mechanics: [
+        'An ASP.NET Core API accepts a starting address and a set of work order IDs (or a filter by assignee), then delegates the routing math to a Python script.',
+        'The Python side geocodes the start location, pulls work order coordinates from the Cityworks database, and builds a weighted distance graph — using real street-network distances via OSMnx/NetworkX when available, or geodesic distance as a fallback.',
+        "Computes pairwise shortest paths with Dijkstra's algorithm, then solves the multi-stop ordering as a Traveling Salesman Problem: a nearest-neighbor heuristic builds an initial route, then 2-opt edge-swapping refines it — with an exact brute-force option for small routes.",
+        'Returns the optimized stop order, total distance, and a ready-to-use Google Maps link, which the .NET API relays straight back to the browser.',
+      ],
+      impact: [
+        'Cuts windshield time for field technicians by replacing ad-hoc, gut-feel routing with a mathematically optimized multi-stop path.',
+        'One click produces a Google Maps link the crew can open immediately — no manual re-plotting of addresses.',
+        'Scales from quick heuristic routing for large work-order batches to exact optimal routing for small, high-priority batches.',
+      ],
+      stack: ['C#', 'ASP.NET Core', 'Python', "Dijkstra's Algorithm", 'TSP Heuristics (2-opt)', 'OSMnx', 'NetworkX', 'geopy'],
     },
     {
-      media: '/cis_cw_dashboard.png',
       title: 'CIS/Cityworks Integration Support Tool',
+      tagline: 'Internal support console for diagnosing and repairing failed CIS/Cityworks integration transactions',
       description: 'Full-stack C#/Python web app enabling bi-directional data transfer between the CIS and Cityworks asset management platforms — SQLite-based transaction parsing, subprocess-isolated Python execution, and automated meter/service-order reprocessing.',
+      images: ['/cis_cw_success.png', '/cis_cw_transactions.png'],
+      mechanics: [
+        'A C# ASP.NET MVC front end lets support staff upload the SQLite staging database produced by the nightly integration job and browse it directly in the browser.',
+        'Staff enter a work order number; the app looks up the matching staging row and calls a Python subprocess that replays the specific CIS or Cityworks API action (e.g. Add Meter Line, Close Service Order) tied to that record.',
+        'Every API call is wrapped so both the successful response and the full error trace are captured and shown in the UI, instead of a support engineer trawling raw log files.',
+        'Designed to support recursive unexpiring of dependent asset chains (Meter → MXU → Register) so a single failed integration does not require untangling each downstream asset by hand.',
+      ],
+      impact: [
+        'Turns a multi-step, log-diving diagnostic process into a point-and-click workflow non-developers on the team can use.',
+        'Shrinks mean time to resolution for stuck integration transactions from a developer-only investigation to a self-service fix.',
+        'Captures structured error detail per transaction, building an audit trail for recurring integration failure patterns.',
+      ],
+      stack: ['C#', 'ASP.NET MVC', 'Python', 'SQLite', 'REST APIs', 'Process/IPC Orchestration'],
     },
     {
       icon: BsAwardFill,
       title: 'Kudos of the Month',
+      tagline: 'Employee recognition web app for nominating and tracking monthly Kudos',
       description: 'C#/.NET MVC employee-recognition web app with a generic authenticated API-proxy layer for secure cross-origin service calls.',
+      images: [],
+      mechanics: [
+        'C#/.NET MVC application backed by a SQL database of employee records, rendering a nomination and recognition view for staff.',
+        'Includes a generic authenticated API-proxy endpoint (GET/POST) that forwards requests to external services, so the front end can call outside APIs without exposing credentials or hitting browser CORS restrictions.',
+      ],
+      impact: [
+        'Gives the department a lightweight, self-hosted way to run employee recognition instead of a manual, email-based nomination process.',
+        'The proxy pattern it introduced became a reusable building block for other internal tools that need to safely call external APIs from the browser.',
+      ],
+      stack: ['C#', '.NET MVC', 'SQL', 'REST API Proxy Pattern'],
     },
   ];
 
@@ -356,7 +421,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projectExperience.map((project, idx) => (
             <div key={idx} className="scroll-reveal" style={{ transitionDelay: `${idx * 80}ms` }}>
-              <Card {...project} />
+              <ProjectCard project={project} />
             </div>
           ))}
         </div>
