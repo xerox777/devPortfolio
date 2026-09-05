@@ -1,7 +1,7 @@
 // components/Navbar.js
 "use client";
 import React from 'react';
-import { BsBook, BsLinkedin, BsGithub, BsFileEarmarkPdfFill, BsFillHouseDoorFill, BsMailbox2Flag, BsGrid } from 'react-icons/bs';
+import { BsBook, BsLinkedin, BsGithub, BsFileEarmarkPdfFill, BsFillHouseDoorFill, BsMailbox2Flag } from 'react-icons/bs';
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from 'react';
@@ -24,13 +24,6 @@ const Navbar = () => {
                             <Link href="/" className="flex items-center gap-2 relative inline-block group">
                                 <BsFillHouseDoorFill className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 <span className="text-text-primary text-base font-medium">Home</span>
-                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
-                            </Link>
-                        </li>
-                        <li className="list-none">
-                            <Link href="/#services" className="flex items-center gap-2 relative group">
-                                <BsGrid className="text-2xl text-text-primary group-hover:text-accent transition-colors duration-300" />
-                                <span className="text-text-primary text-base font-medium">Services</span>
                                 <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left"></span>
                             </Link>
                         </li>
@@ -86,13 +79,6 @@ const Navbar = () => {
                             <Link href="/" className="flex items-center gap-2 text-text-primary font-medium relative group">
                                 <BsFillHouseDoorFill className="text-xl text-text-primary group-hover:text-accent transition-colors duration-300" />
                                 Home
-                                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
-                            </Link>
-                        </span>
-                        <span className="flex mx-3 gap-3 items-center justify-center">
-                            <Link href="/#services" className="flex items-center gap-2 text-text-primary font-medium relative group">
-                                <BsGrid className="text-xl text-text-primary group-hover:text-accent transition-colors duration-300" />
-                                Services
                                 <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 origin-left" />
                             </Link>
                         </span>
