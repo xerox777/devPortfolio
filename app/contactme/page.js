@@ -50,7 +50,7 @@ function ContactForm() {
                                     type="text"
                                     name="user_name"
                                     required
-                                    className="w-full border border-border bg-primary/50 text-text-primary rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-accent placeholder-text-secondary/50"
+                                    className="w-full border border-border bg-primary/50 text-text-primary rounded-lg p-3 focus:outline-none text-black  focus:ring-2 focus:ring-accent placeholder-text-secondary/50"
                                 />
                             </div>
                             <div>
@@ -59,7 +59,7 @@ function ContactForm() {
                                     type="email"
                                     name="to_email"
                                     required
-                                    className="w-full border border-border bg-primary/50 text-text-primary rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-accent placeholder-text-secondary/50"
+                                    className="w-full border border-border bg-primary/50 text-text-primary rounded-lg p-3 text-black  focus:outline-none focus:ring-2 focus:ring-accent placeholder-text-secondary/50"
                                 />
                             </div>
                             <div>
@@ -68,7 +68,7 @@ function ContactForm() {
                                     type="text"
                                     name="title"
                                     required
-                                    className="w-full border border-border bg-primary/50 text-text-primary rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-accent placeholder-text-secondary/50"
+                                    className="w-full border border-border text-black bg-primary/50 text-text-primary rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-accent placeholder-text-secondary/50"
                                 />
                             </div>
                             <div>
@@ -77,12 +77,12 @@ function ContactForm() {
                                     name="message"
                                     rows="5"
                                     required
-                                    className="w-full border border-border bg-primary/50 text-text-primary rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-accent placeholder-text-secondary/50 resize-none"
+                                    className="w-full border border-border bg-primary/50 text-text-primary text-black  rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-accent placeholder-text-secondary/50 resize-none"
                                 />
                             </div>
                             <button
                                 type="submit"
-                                className="w-full bg-accent hover:bg-accent-light text-primary font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+                                className="w-full bg-accent hover:bg-accent-light text-primary text-black font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
                             >
                                 Send Message
                             </button>
