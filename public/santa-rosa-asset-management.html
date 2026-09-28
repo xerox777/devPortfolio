@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asset Management Team — City of Santa Rosa</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Lato:wght@300;400;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif:   ['Playfair Display', 'Georgia', 'serif'],
+            sans:    ['Lato', 'sans-serif'],
+            hand:    ['Caveat', 'cursive'],
+          },
+          colors: {
+            rose:  { DEFAULT: '#8B1A2A', light: '#B5304A', dark: '#5D1020', pale: '#FDF0F2', soft: '#F5D6DB' },
+            sage:  { DEFAULT: '#6B7D3A', light: '#8EA44B', dark: '#4A5A25', pale: '#F2F5E8', soft: '#D7E2B0' },
+            sky:   {
+              50:  '#EBF6FD',
+              100: '#D4ECFA',
+              200: '#A8D9F5',
+              300: '#72C0EC',
+              400: '#47A8E0',
+              500: '#2E8BC0',
+              600: '#1D6B99',
+              700: '#124F73',
+              800: '#0A3550',
+              900: '#061E30',
+            },
+            cream: '#FAFAF7',
+            stone: '#F4F1EC',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body { font-family: 'Lato', sans-serif; background: #FFFFFF; color: #2D2D2D; }
+
+    /* ── Soft card shadow ── */
+    .card { background: #fff; border-radius: 1.25rem; box-shadow: 0 2px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.06); }
+    .card-sky  { background: #EBF6FD; border: 1px solid #A8D9F5; }
+    .card-rose { background: #FDF0F2; border: 1px solid #F5D6DB; }
+    .card-sage { background: #F2F5E8; border: 1px solid #D7E2B0; }
+
+    /* ── Section backgrounds ── */
+    .bg-sky-wash  { background: linear-gradient(160deg, #EBF6FD 0%, #F8FCFF 60%, #EDF5F0 100%); }
+    .bg-rose-wash { background: linear-gradient(160deg, #FDF5F6 0%, #FFFBF8 100%); }
+    .bg-cream     { background: #FAFAF7; }
+
+    /* ── Wavy SVG dividers ── */
+    .wave-down, .wave-up { display: block; width: 100%; overflow: hidden; line-height: 0; }
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Progress bar ── */
+    .bar-track { background: rgba(0,0,0,0.08); border-radius: 99px; overflow: hidden; height: 10px; }
+    .bar-fill  { height: 100%; border-radius: 99px; }
+
+    /* ── Status dot ── */
+    .dot-live { animation: blink 2s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+    /* ── Hover lift ── */
+    .hover-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.11); }
+
+    /* ── Checklist items ── */
+    .check-done  { color: #6B7D3A; }
+    .check-pend  { color: #B0B8C1; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #f0f0f0; }
+    ::-webkit-scrollbar-thumb { background: #8B1A2A; border-radius: 3px; }
+
+    /* ── Marquee ── */
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── Gentle float ── */
+    @keyframes floatUp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .float { animation: floatUp 5s ease-in-out infinite; }
+
+    /* ── Decorative rose SVG ── */
+    .deco-rose { opacity: 0.10; }
+
+    /* ── Hero sky gradient ── */
+    .hero-sky {
+      background: linear-gradient(175deg, #D4ECFA 0%, #EBF6FD 30%, #F0F9FF 55%, #EFF5E8 80%, #FAFAF7 100%);
+    }
+
+    /* ── Inline hand-drawn underline ── */
+    .underline-rose {
+      text-decoration: underline;
+      text-decoration-color: #8B1A2A;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 5px;
+    }
+
+    /* ── Tag chips ── */
+    .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 12px; border-radius: 99px; }
+    .chip-rose  { background: #FDF0F2; color: #8B1A2A; border: 1px solid #F5D6DB; }
+    .chip-sage  { background: #F2F5E8; color: #6B7D3A; border: 1px solid #D7E2B0; }
+    .chip-sky   { background: #EBF6FD; color: #1D6B99; border: 1px solid #A8D9F5; }
+    .chip-amber { background: #FEF9EB; color: #92620D; border: 1px solid #F9DFA0; }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       NAV
+  ══════════════════════════════════════ -->
+  <nav style="background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);" class="sticky top-0 z-50 border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+
+      <!-- Brand -->
+      <div class="flex items-center gap-3">
+        <!-- Rose mark -->
+        <svg viewBox="0 0 40 40" class="w-9 h-9 shrink-0" fill="none">
+          <circle cx="20" cy="20" r="19" fill="#FDF0F2" stroke="#F5D6DB" stroke-width="1"/>
+          <path d="M20 8 C15 8 10 12 10 17 C10 23 14 27 18.5 30 C18.5 30 17.5 33 20 34 C22.5 33 21.5 30 21.5 30 C26 27 30 23 30 17 C30 12 25 8 20 8Z" fill="#8B1A2A"/>
+          <path d="M20 10 C17 10 13.5 13 13.5 17 C13.5 21 16 24 18.5 26" stroke="#c4304a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M17 30.5 C14.5 29.5 12.5 32 14 34" stroke="#6B7D3A" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M23 30.5 C25.5 29.5 27.5 32 26 34" stroke="#6B7D3A" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="20" y1="34" x2="20" y2="37" stroke="#6B7D3A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <p class="text-[10px] font-bold text-rose-DEFAULT tracking-widest uppercase leading-none">City of Santa Rosa</p>
+          <p class="text-sm font-bold text-gray-800 leading-tight">Asset Management <span class="text-sky-500 font-normal">· Water</span></p>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div class="hidden md:flex items-center gap-7 text-sm font-bold text-gray-500">
+        <a href="#achievement"    class="hover:text-rose-DEFAULT transition-colors">Achievement</a>
+        <a href="#meter-desk-app" class="hover:text-rose-DEFAULT transition-colors">MeterDesk App</a>
+        <a href="#roadmap"        class="hover:text-rose-DEFAULT transition-colors">Roadmap</a>
+        <a href="#impact"         class="hover:text-rose-DEFAULT transition-colors">Impact</a>
+      </div>
+
+      <!-- Badge -->
+      <span class="chip chip-sage">
+        <span class="w-1.5 h-1.5 rounded-full bg-sage-DEFAULT dot-live"></span>
+        Systems Live
+      </span>
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section class="relative hero-sky overflow-hidden pt-16 pb-0">
+
+    <!-- Decorative clouds / hills SVG -->
+    <svg class="absolute top-0 left-0 w-full h-full pointer-events-none" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" fill="none">
+      <!-- Rolling hills -->
+      <ellipse cx="200"  cy="620" rx="380" ry="200" fill="#D7E2B0" opacity="0.35"/>
+      <ellipse cx="900"  cy="640" rx="500" ry="220" fill="#A8D9F5" opacity="0.25"/>
+      <ellipse cx="1300" cy="610" rx="320" ry="180" fill="#D7E2B0" opacity="0.30"/>
+      <!-- Gentle cloud blobs -->
+      <ellipse cx="180" cy="80"  rx="120" ry="45" fill="white" opacity="0.65"/>
+      <ellipse cx="260" cy="65"  rx="90"  ry="38" fill="white" opacity="0.55"/>
+      <ellipse cx="1200" cy="110" rx="140" ry="50" fill="white" opacity="0.55"/>
+      <ellipse cx="1300" cy="90"  rx="100" ry="40" fill="white" opacity="0.50"/>
+      <!-- Large decorative rose petal -->
+      <path d="M1340 -40 C1280 -40 1220 20 1220 80 C1220 160 1270 210 1318 245 C1318 245 1308 270 1340 280 C1372 270 1362 245 1362 245 C1410 210 1460 160 1460 80 C1460 20 1400 -40 1340 -40Z" fill="#8B1A2A" opacity="0.07"/>
+      <!-- Small leaf -->
+      <path d="M80 500 C60 480 30 490 40 520 C50 540 80 535 80 500Z" fill="#6B7D3A" opacity="0.12"/>
+      <path d="M100 510 C120 490 150 500 140 530 C130 550 100 545 100 510Z" fill="#6B7D3A" opacity="0.10"/>
+    </svg>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center">
+
+      <!-- Eyebrow handwritten label -->
+      <p class="font-hand text-xl text-sky-500 mb-3">City of Santa Rosa · Public Works &amp; Utilities</p>
+
+      <!-- Headline -->
+      <h1 class="font-serif font-bold leading-tight">
+        <span class="block text-5xl sm:text-6xl md:text-7xl text-gray-800">Asset Management</span>
+        <span class="block text-4xl sm:text-5xl md:text-6xl italic text-rose-DEFAULT mt-1">Reimagined</span>
+      </h1>
+
+      <!-- Subtext -->
+      <p class="mt-6 text-base sm:text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed font-light">
+        Santa Rosa's Asset Management Team is building the digital infrastructure that keeps our city's
+        water and utilities running smarter — integrating modern platforms, automating critical workflows,
+        and delivering real results for every neighbor we serve.
+      </p>
+
+      <!-- Stat pills -->
+      <div class="mt-10 flex flex-wrap justify-center gap-3 sm:gap-4">
+        <div class="card flex items-center gap-3 px-5 py-3 hover-lift">
+          <span class="text-2xl font-serif font-bold text-rose-DEFAULT">100%</span>
+          <span class="text-xs text-gray-400 font-bold leading-tight text-left">Automated<br>Meter Billing</span>
+        </div>
+        <div class="card flex items-center gap-3 px-5 py-3 hover-lift">
+          <span class="text-2xl font-serif font-bold text-sky-500">3</span>
+          <span class="text-xs text-gray-400 font-bold leading-tight text-left">Major Platform<br>Initiatives</span>
+        </div>
+        <div class="card flex items-center gap-3 px-5 py-3 hover-lift">
+          <span class="text-2xl font-serif font-bold text-sage-DEFAULT">2026</span>
+          <span class="text-xs text-gray-400 font-bold leading-tight text-left">Unity Platform<br>Target</span>
+        </div>
+      </div>
+
+      <!-- Scroll nudge -->
+      <div class="mt-14 flex flex-col items-center gap-1.5 text-gray-300 text-xs float">
+        <span class="font-hand text-base text-gray-400">Scroll to explore</span>
+        <i data-lucide="chevrons-down" class="w-5 h-5 text-sky-300"></i>
+      </div>
+    </div>
+
+    <!-- Wave bottom -->
+    <svg class="wave-down" viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:60px">
+      <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/>
+    </svg>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       ACHIEVEMENT
+  ══════════════════════════════════════ -->
+  <section id="achievement" class="bg-white py-20 sm:py-28">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <!-- Label -->
+      <div class="text-center mb-12 reveal">
+        <p class="font-hand text-xl text-sage-DEFAULT mb-2">Landmark Achievement</p>
+        <h2 class="font-serif font-bold text-4xl sm:text-5xl text-gray-800">Delivered &amp; Fully Live</h2>
+        <p class="mt-3 text-gray-400 text-base max-w-lg mx-auto">The integration that changed how Santa Rosa manages water — end-to-end, fully automated.</p>
+      </div>
+
+      <!-- Big achievement card -->
+      <div class="reveal">
+        <div class="card overflow-hidden hover-lift">
+          <!-- Top color bar -->
+          <div class="h-2 w-full" style="background: linear-gradient(90deg, #8B1A2A, #6B7D3A, #2E8BC0)"></div>
+
+          <div class="p-8 sm:p-12">
+            <div class="flex flex-wrap items-center gap-3 mb-8">
+              <span class="chip chip-sage">
+                <span class="w-1.5 h-1.5 rounded-full bg-sage-DEFAULT dot-live"></span>
+                Completed &amp; Live
+              </span>
+              <span class="chip chip-sky">
+                <i data-lucide="zap" class="w-3 h-3"></i>
+                Fully Automated
+              </span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10 items-start">
+              <!-- Copy -->
+              <div>
+                <h3 class="font-serif font-bold text-3xl text-gray-800 leading-snug mb-4">
+                  CIS Water Billing &amp;<br>
+                  <span class="text-sage-DEFAULT">Cityworks Integration</span>
+                </h3>
+                <p class="text-gray-500 leading-relaxed mb-4">
+                  The Asset Management Team engineered and deployed a seamless, end-to-end integration
+                  between Santa Rosa's CIS Water Billing platform and Cityworks — unlocking real-time
+                  meter data synchronization and eliminating manual hand-offs entirely.
+                </p>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                  What once required hours of manual reconciliation now runs automatically, around the clock,
+                  with zero human intervention. This is the backbone of smarter utility management in our city.
+                </p>
+              </div>
+
+              <!-- Feature tiles -->
+              <div class="space-y-4">
+                <div class="card-sky rounded-2xl p-4 flex items-start gap-3 hover-lift">
+                  <div class="w-9 h-9 rounded-xl bg-sky-100 border border-sky-200 flex items-center justify-center shrink-0">
+                    <i data-lucide="gauge" class="w-4 h-4 text-sky-600"></i>
+                  </div>
+                  <div>
+                    <p class="font-bold text-sm text-gray-700">Live Meter Data Sync</p>
+                    <p class="text-gray-400 text-xs mt-0.5 leading-relaxed">Real-time meter readings flow directly from field assets into both CIS and Cityworks simultaneously.</p>
+                  </div>
+                </div>
+                <div class="card-sage rounded-2xl p-4 flex items-start gap-3 hover-lift">
+                  <div class="w-9 h-9 rounded-xl bg-sage-pale border border-sage-soft flex items-center justify-center shrink-0">
+                    <i data-lucide="bot" class="w-4 h-4 text-sage-DEFAULT"></i>
+                  </div>
+                  <div>
+                    <p class="font-bold text-sm text-gray-700">Fully Automated Processes</p>
+                    <p class="text-gray-400 text-xs mt-0.5 leading-relaxed">End-to-end billing workflows run without manual touch — from meter read to invoice generation.</p>
+                  </div>
+                </div>
+                <div class="card-rose rounded-2xl p-4 flex items-start gap-3 hover-lift">
+                  <div class="w-9 h-9 rounded-xl bg-rose-pale border border-rose-soft flex items-center justify-center shrink-0">
+                    <i data-lucide="link-2" class="w-4 h-4 text-rose-DEFAULT"></i>
+                  </div>
+                  <div>
+                    <p class="font-bold text-sm text-gray-700">Unified Data Pipeline</p>
+                    <p class="text-gray-400 text-xs mt-0.5 leading-relaxed">Single source of truth across utility billing and work management — no more data silos.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="mt-10 pt-8 border-t border-gray-100">
+              <div class="flex justify-between text-sm mb-2">
+                <span class="text-gray-400 font-bold text-xs uppercase tracking-wider">Project Completion</span>
+                <span class="font-bold text-sage-DEFAULT">100%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width:100%; background: linear-gradient(90deg, #4A5A25, #8EA44B);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave separator -->
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="display:block;height:60px;width:100%">
+    <path d="M0,30 C360,70 720,0 1080,40 C1260,60 1380,20 1440,30 L1440,80 L0,80 Z" fill="#FAFAF7"/>
+  </svg>
+
+
+  <!-- ══════════════════════════════════════
+       METER DESK WEB APP
+  ══════════════════════════════════════ -->
+  <section id="meter-desk-app" class="bg-cream py-20 sm:py-28">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <!-- Section header -->
+      <div class="text-center mb-12 reveal">
+        <p class="font-hand text-xl text-sky-500 mb-2">Built In-House</p>
+        <h2 class="font-serif font-bold text-4xl sm:text-5xl text-gray-800">MeterDesk Web App</h2>
+        <p class="mt-3 text-gray-400 text-base max-w-lg mx-auto">A custom-built tool that transformed how the Meter Desk team creates GIS assets — from tedious manual entry to fast, automated batch processing.</p>
+      </div>
+
+      <!-- Main showcase card -->
+      <div class="reveal">
+        <div class="card overflow-hidden hover-lift">
+          <!-- Top sky-blue bar -->
+          <div class="h-2 w-full bg-sky-500"></div>
+
+          <div class="p-8 sm:p-12">
+
+            <div class="grid lg:grid-cols-2 gap-10 items-start">
+
+              <!-- LEFT: description + features -->
+              <div>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="chip chip-sky">
+                    <i data-lucide="code-2" class="w-3 h-3"></i>
+                    Custom Built · C#
+                  </span>
+                  <span class="chip chip-sage">
+                    <span class="w-1.5 h-1.5 rounded-full bg-sage-DEFAULT dot-live"></span>
+                    Live &amp; In Use
+                  </span>
+                </div>
+
+                <h3 class="font-serif font-bold text-3xl text-gray-800 leading-snug mb-1">
+                  Automated GIS Asset Creation
+                </h3>
+                <p class="text-sky-500 font-bold text-sm mb-5">for Meters, Registers &amp; MXUs</p>
+
+                <p class="text-gray-500 leading-relaxed mb-4">
+                  Grant Fonseca built this ASP.NET Core web application to support the Meter Desk team in
+                  creating new Meter, Register, and MXU assets directly in GIS — without ever opening
+                  ArcGIS Desktop. Staff can submit a single asset via form, or upload a JSON file to process
+                  hundreds at once.
+                </p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-7">
+                  Behind the scenes, each submission is placed into a concurrency-safe job queue so multiple
+                  team members can use the app simultaneously without conflicts. The queue kicks off a subprocess
+                  that activates the ArcGIS Virtual Environment, leverages the <strong class="text-gray-600">ArcPy library</strong>,
+                  and performs posts and reconciles for all new assets in batches — dramatically faster than
+                  adding each asset one-by-one in ArcGIS.
+                </p>
+
+                <!-- Feature tiles -->
+                <div class="space-y-3 mb-8">
+                  <div class="card-sky rounded-xl p-4 flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-sky-100 border border-sky-200 flex items-center justify-center shrink-0">
+                      <i data-lucide="list-checks" class="w-4 h-4 text-sky-600"></i>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm text-gray-700">Concurrency-Safe Job Queue</p>
+                      <p class="text-gray-400 text-xs mt-0.5 leading-relaxed">Multiple staff can submit simultaneously — jobs are safely queued, tracked, and processed in order without race conditions.</p>
+                    </div>
+                  </div>
+                  <div class="card-sage rounded-xl p-4 flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-sage-pale border border-sage-soft flex items-center justify-center shrink-0">
+                      <i data-lucide="terminal" class="w-4 h-4 text-sage-DEFAULT"></i>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm text-gray-700">ArcPy Subprocess Integration</p>
+                      <p class="text-gray-400 text-xs mt-0.5 leading-relaxed">Each job activates the ArcGIS Virtual Environment as a subprocess and uses ArcPy to post and reconcile new assets in the geodatabase.</p>
+                    </div>
+                  </div>
+                  <div class="card-rose rounded-xl p-4 flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-rose-pale border border-rose-soft flex items-center justify-center shrink-0">
+                      <i data-lucide="layers" class="w-4 h-4 text-rose-DEFAULT"></i>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm text-gray-700">Single &amp; Batch Modes</p>
+                      <p class="text-gray-400 text-xs mt-0.5 leading-relaxed">Submit one asset via the web form, or upload a JSON file to create hundreds of Meters, Registers, or MXUs in a single run.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Byline -->
+                <div class="flex items-center gap-3 pt-5 border-t border-gray-100">
+                  <div class="w-9 h-9 rounded-full bg-sky-50 border border-sky-100 flex items-center justify-center shrink-0">
+                    <i data-lucide="user-check" class="w-4 h-4 text-sky-500"></i>
+                  </div>
+                  <div>
+                    <p class="font-bold text-sm text-gray-700">Grant Fonseca</p>
+                    <p class="text-gray-400 text-xs">Asset Management Team · City of Santa Rosa</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RIGHT: screenshots -->
+              <div class="space-y-5">
+                <div>
+                  <div class="rounded-xl overflow-hidden border border-gray-200 shadow-md hover-lift" style="transition: transform 0.25s ease, box-shadow 0.25s ease;">
+                    <img src="./FormSubmission.png"
+                         alt="MeterDeskWebApp — meter submission form"
+                         class="w-full object-cover object-top"
+                         style="max-height: 260px;" />
+                  </div>
+                  <p class="font-hand text-sm text-gray-400 mt-2 text-center">Meter submission form — single or bulk JSON upload</p>
+                </div>
+                <div>
+                  <div class="rounded-xl overflow-hidden border border-gray-200 shadow-md hover-lift" style="transition: transform 0.25s ease, box-shadow 0.25s ease;">
+                    <img src="./JobQueue.png"
+                         alt="MeterDeskWebApp — reconcile job queue"
+                         class="w-full object-cover object-top"
+                         style="max-height: 260px;" />
+                  </div>
+                  <p class="font-hand text-sm text-gray-400 mt-2 text-center">Live reconcile job queue — concurrent, tracked &amp; auditable</p>
+                </div>
+              </div>
+
+            </div><!-- /grid -->
+
+            <!-- Tech badge strip -->
+            <div class="mt-10 pt-6 border-t border-gray-100 flex flex-wrap gap-2 justify-center">
+              <span class="chip chip-sky"><i data-lucide="server" class="w-3 h-3"></i> ASP.NET Core / C#</span>
+              <span class="chip chip-sage"><i data-lucide="map" class="w-3 h-3"></i> ArcGIS ArcPy</span>
+              <span class="chip chip-rose"><i data-lucide="list-checks" class="w-3 h-3"></i> Concurrency-Safe Queue</span>
+              <span class="chip" style="background:#FEF9EB;color:#92620D;border:1px solid #F9DFA0;">
+                <i data-lucide="layers" class="w-3 h-3"></i> Batch GIS Processing
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave separator -->
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="display:block;height:60px;width:100%">
+    <path d="M0,30 C360,70 720,0 1080,40 C1260,60 1380,20 1440,30 L1440,80 L0,80 Z" fill="#EBF6FD"/>
+  </svg>
+
+
+  <!-- ══════════════════════════════════════
+       ROADMAP
+  ══════════════════════════════════════ -->
+  <section id="roadmap" class="py-20 sm:py-28" style="background:#EBF6FD">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <div class="text-center mb-12 reveal">
+        <p class="font-hand text-xl text-sky-500 mb-2">What's Coming Next</p>
+        <h2 class="font-serif font-bold text-4xl sm:text-5xl text-gray-800">Our Roadmap</h2>
+        <p class="mt-3 text-gray-500 text-base max-w-lg mx-auto">Three transformative initiatives shaping the future of Santa Rosa's digital infrastructure.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Unity -->
+        <div class="reveal card hover-lift flex flex-col overflow-hidden" style="transition-delay:0.05s">
+          <div class="h-1.5 w-full bg-rose-DEFAULT"></div>
+          <div class="p-7 flex flex-col flex-1">
+            <div class="flex items-start justify-between mb-5">
+              <div class="w-11 h-11 rounded-2xl bg-rose-pale border border-rose-soft flex items-center justify-center">
+                <i data-lucide="layers" class="w-5 h-5 text-rose-DEFAULT"></i>
+              </div>
+              <span class="chip chip-rose">
+                <i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i>
+                In Progress
+              </span>
+            </div>
+
+            <h3 class="font-serif font-bold text-2xl text-gray-800 leading-snug mb-3">
+              Cityworks<br><span class="text-rose-DEFAULT">Unity Upgrade</span>
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed flex-1">
+              Migrating our full platform to <strong class="text-gray-600">Cityworks Unity</strong> —
+              a cloud-ready, next-generation system with enhanced GIS and a friendlier interface for
+              field crews and operations staff.
+            </p>
+
+            <ul class="mt-6 space-y-2 text-sm">
+              <li class="flex items-center gap-2 check-done font-bold">
+                <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i> Requirements &amp; gap analysis
+              </li>
+              <li class="flex items-center gap-2 check-done font-bold">
+                <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i> Data migration planning
+              </li>
+              <li class="flex items-center gap-2 check-pend">
+                <i data-lucide="circle" class="w-4 h-4 shrink-0"></i> Configuration &amp; testing
+              </li>
+              <li class="flex items-center gap-2 check-pend">
+                <i data-lucide="circle" class="w-4 h-4 shrink-0"></i> Go-live &amp; cutover
+              </li>
+            </ul>
+
+            <div class="mt-6 pt-5 border-t border-gray-100">
+              <div class="flex justify-between text-xs mb-1.5">
+                <span class="text-gray-400 font-bold uppercase tracking-wider">Progress</span>
+                <span class="font-bold text-rose-DEFAULT">45%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill w-[45%]" style="background: linear-gradient(90deg, #5D1020, #B5304A);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SpryPoint -->
+        <div class="reveal card hover-lift flex flex-col overflow-hidden" style="transition-delay:0.12s">
+          <div class="h-1.5 w-full bg-sky-500"></div>
+          <div class="p-7 flex flex-col flex-1">
+            <div class="flex items-start justify-between mb-5">
+              <div class="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center">
+                <i data-lucide="plug-zap" class="w-5 h-5 text-sky-500"></i>
+              </div>
+              <span class="chip chip-sky">
+                <i data-lucide="calendar-clock" class="w-3 h-3"></i>
+                Upcoming
+              </span>
+            </div>
+
+            <h3 class="font-serif font-bold text-2xl text-gray-800 leading-snug mb-3">
+              SpryPoint<br><span class="text-sky-500">Integration</span>
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed flex-1">
+              Building on our CIS/Cityworks success, we're connecting <strong class="text-gray-600">SpryPoint</strong>
+              — a leading utility billing platform — into our ecosystem for seamless data exchange
+              between customer billing and field operations.
+            </p>
+
+            <ul class="mt-6 space-y-2 text-sm">
+              <li class="flex items-center gap-2 check-done font-bold">
+                <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i> Vendor scoping initiated
+              </li>
+              <li class="flex items-center gap-2 check-pend">
+                <i data-lucide="circle" class="w-4 h-4 shrink-0"></i> API &amp; data mapping
+              </li>
+              <li class="flex items-center gap-2 check-pend">
+                <i data-lucide="circle" class="w-4 h-4 shrink-0"></i> UAT &amp; validation
+              </li>
+              <li class="flex items-center gap-2 check-pend">
+                <i data-lucide="circle" class="w-4 h-4 shrink-0"></i> Production deployment
+              </li>
+            </ul>
+
+            <div class="mt-6 pt-5 border-t border-gray-100">
+              <div class="flex justify-between text-xs mb-1.5">
+                <span class="text-gray-400 font-bold uppercase tracking-wider">Progress</span>
+                <span class="font-bold text-sky-500">10%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill w-[10%]" style="background: linear-gradient(90deg, #124F73, #47A8E0);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CIP Tools -->
+        <div class="reveal card hover-lift flex flex-col overflow-hidden" style="transition-delay:0.20s">
+          <div class="h-1.5 w-full bg-sage-DEFAULT"></div>
+          <div class="p-7 flex flex-col flex-1">
+            <div class="flex items-start justify-between mb-5">
+              <div class="w-11 h-11 rounded-2xl bg-sage-pale border border-sage-soft flex items-center justify-center">
+                <i data-lucide="construction" class="w-5 h-5 text-sage-DEFAULT"></i>
+              </div>
+              <span class="chip chip-sage">
+                <i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i>
+                In Development
+              </span>
+            </div>
+
+            <h3 class="font-serif font-bold text-2xl text-gray-800 leading-snug mb-3">
+              CIP Tools<br><span class="text-sage-DEFAULT">Suite</span>
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed flex-1">
+              A purpose-built Capital Improvement Program toolkit giving city leadership and project
+              managers visibility into capital projects — budget tracking, schedule management, condition
+              data, and dashboards tied to Cityworks and GIS.
+            </p>
+
+            <ul class="mt-6 space-y-2 text-sm">
+              <li class="flex items-center gap-2 check-done font-bold">
+                <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i> Stakeholder needs gathered
+              </li>
+              <li class="flex items-center gap-2 check-done font-bold">
+                <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i> Tool architecture designed
+              </li>
+              <li class="flex items-center gap-2 check-pend">
+                <i data-lucide="circle" class="w-4 h-4 shrink-0"></i> Dashboard build &amp; integration
+              </li>
+              <li class="flex items-center gap-2 check-pend">
+                <i data-lucide="circle" class="w-4 h-4 shrink-0"></i> Department-wide rollout
+              </li>
+            </ul>
+
+            <div class="mt-6 pt-5 border-t border-gray-100">
+              <div class="flex justify-between text-xs mb-1.5">
+                <span class="text-gray-400 font-bold uppercase tracking-wider">Progress</span>
+                <span class="font-bold text-sage-DEFAULT">25%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill w-[25%]" style="background: linear-gradient(90deg, #4A5A25, #8EA44B);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave separator -->
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="display:block;height:60px;width:100%">
+    <path d="M0,50 C480,0 960,80 1440,20 L1440,80 L0,80 Z" fill="#FAFAF7"/>
+  </svg>
+
+
+  <!-- ══════════════════════════════════════
+       IMPACT
+  ══════════════════════════════════════ -->
+  <section id="impact" class="bg-cream py-20 sm:py-28">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <div class="text-center mb-12 reveal">
+        <p class="font-hand text-xl text-rose-DEFAULT mb-2">Why It Matters</p>
+        <h2 class="font-serif font-bold text-4xl sm:text-5xl text-gray-800">Built for Our Community</h2>
+        <p class="mt-3 text-gray-400 text-base max-w-lg mx-auto">Every initiative delivers real, measurable value to residents, operations staff, and city leadership.</p>
+      </div>
+
+      <!-- Stats row -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div class="reveal card p-6 text-center hover-lift" style="transition-delay:0.04s">
+          <div class="w-10 h-10 rounded-xl bg-sage-pale border border-sage-soft flex items-center justify-center mx-auto mb-3">
+            <i data-lucide="clock" class="w-5 h-5 text-sage-DEFAULT"></i>
+          </div>
+          <div class="font-serif font-bold text-4xl text-sage-DEFAULT">0</div>
+          <div class="text-xs text-gray-400 mt-1 font-bold leading-snug">Manual Hours<br>on Meter Billing</div>
+        </div>
+        <div class="reveal card p-6 text-center hover-lift" style="transition-delay:0.08s">
+          <div class="w-10 h-10 rounded-xl bg-rose-pale border border-rose-soft flex items-center justify-center mx-auto mb-3">
+            <i data-lucide="activity" class="w-5 h-5 text-rose-DEFAULT"></i>
+          </div>
+          <div class="font-serif font-bold text-4xl text-rose-DEFAULT">24/7</div>
+          <div class="text-xs text-gray-400 mt-1 font-bold leading-snug">Automated<br>Data Sync</div>
+        </div>
+        <div class="reveal card p-6 text-center hover-lift" style="transition-delay:0.12s">
+          <div class="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center mx-auto mb-3">
+            <i data-lucide="database" class="w-5 h-5 text-sky-500"></i>
+          </div>
+          <div class="font-serif font-bold text-4xl text-sky-500">1</div>
+          <div class="text-xs text-gray-400 mt-1 font-bold leading-snug">Source of Truth<br>Across Systems</div>
+        </div>
+        <div class="reveal card p-6 text-center hover-lift" style="transition-delay:0.16s">
+          <div class="w-10 h-10 rounded-xl bg-sage-pale border border-sage-soft flex items-center justify-center mx-auto mb-3">
+            <i data-lucide="trending-up" class="w-5 h-5 text-sage-DEFAULT"></i>
+          </div>
+          <div class="font-serif font-bold text-4xl text-sage-DEFAULT">3+</div>
+          <div class="text-xs text-gray-400 mt-1 font-bold leading-snug">Platform<br>Integrations</div>
+        </div>
+      </div>
+
+      <!-- Quote card -->
+      <div class="reveal">
+        <div class="relative card overflow-hidden p-10 sm:p-14 text-center">
+          <!-- Decorative background rose -->
+          <svg class="absolute right-0 bottom-0 w-64 h-64 deco-rose pointer-events-none" viewBox="0 0 400 400" fill="none">
+            <path d="M200 20 C120 20 60 80 60 160 C60 250 120 310 180 350 C180 350 160 380 200 395 C240 380 220 350 220 350 C280 310 340 250 340 160 C340 80 280 20 200 20Z" fill="#8B1A2A"/>
+            <path d="M185 395 L200 410 L215 395" fill="#6B7D3A"/>
+            <path d="M190 395 L200 420 L210 395" fill="#6B7D3A"/>
+          </svg>
+          <!-- Decorative leaf left -->
+          <svg class="absolute left-0 top-0 w-40 h-40 pointer-events-none" viewBox="0 0 200 200" fill="none" style="opacity:0.08">
+            <path d="M100 180 C100 180 20 140 20 80 C20 40 60 20 100 20 C140 20 180 40 180 80 C180 140 100 180 100 180Z" fill="#6B7D3A"/>
+            <path d="M100 180 L100 20" stroke="#8EA44B" stroke-width="3"/>
+          </svg>
+
+          <div class="relative z-10 max-w-2xl mx-auto">
+            <!-- Ornament -->
+            <p class="font-hand text-6xl text-sky-200 leading-none mb-2">"</p>
+            <blockquote class="font-serif italic text-2xl sm:text-3xl text-gray-700 leading-snug mb-6">
+              The Asset Management Team is redefining what modern, connected infrastructure looks like for cities.
+            </blockquote>
+            <p class="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto">
+              From automated billing integrations to future-ready Unity migrations, every decision is made
+              with one goal — delivering better service to the residents of Santa Rosa through smarter,
+              more resilient systems.
+            </p>
+            <div class="mt-8 flex items-center justify-center gap-3">
+              <svg viewBox="0 0 40 40" class="w-10 h-10 shrink-0" fill="none">
+                <circle cx="20" cy="20" r="19" fill="#FDF0F2" stroke="#F5D6DB" stroke-width="1"/>
+                <path d="M20 8 C15 8 10 12 10 17 C10 23 14 27 18.5 30 C18.5 30 17.5 33 20 34 C22.5 33 21.5 30 21.5 30 C26 27 30 23 30 17 C30 12 25 8 20 8Z" fill="#8B1A2A"/>
+                <path d="M17 30.5 C14.5 29.5 12.5 32 14 34" stroke="#6B7D3A" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M23 30.5 C25.5 29.5 27.5 32 26 34" stroke="#6B7D3A" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="20" y1="34" x2="20" y2="37" stroke="#6B7D3A" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <div class="text-left">
+                <p class="font-bold text-sm text-gray-700">Asset Management Team</p>
+                <p class="text-gray-400 text-xs">City of Santa Rosa · Public Works &amp; Utilities · Water</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Wave separator -->
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="display:block;height:60px;width:100%">
+    <path d="M0,20 C360,70 1080,0 1440,50 L1440,80 L0,80 Z" fill="#EBF6FD"/>
+  </svg>
+
+
+  <!-- ══════════════════════════════════════
+       TECH MARQUEE
+  ══════════════════════════════════════ -->
+  <section style="background:#EBF6FD" class="py-12 overflow-hidden">
+    <p class="text-center font-hand text-lg text-sky-400 mb-6">Platforms &amp; Technologies</p>
+    <div class="overflow-hidden">
+      <div class="flex gap-8 items-center" style="animation:marquee 28s linear infinite;width:max-content">
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="layers" class="w-4 h-4 text-rose-light"></i> Cityworks Unity</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="droplets" class="w-4 h-4 text-sky-400"></i> CIS Water Billing</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="plug-zap" class="w-4 h-4 text-sky-500"></i> SpryPoint</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="construction" class="w-4 h-4 text-sage-DEFAULT"></i> CIP Tools Suite</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="map" class="w-4 h-4 text-sage-light"></i> Esri GIS</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="gauge" class="w-4 h-4 text-sky-400"></i> Smart Meter AMI</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="bot" class="w-4 h-4 text-rose-DEFAULT"></i> Process Automation</span>
+        <span class="text-gray-200">·</span>
+        <!-- duplicate -->
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="layers" class="w-4 h-4 text-rose-light"></i> Cityworks Unity</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="droplets" class="w-4 h-4 text-sky-400"></i> CIS Water Billing</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="plug-zap" class="w-4 h-4 text-sky-500"></i> SpryPoint</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="construction" class="w-4 h-4 text-sage-DEFAULT"></i> CIP Tools Suite</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="map" class="w-4 h-4 text-sage-light"></i> Esri GIS</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="gauge" class="w-4 h-4 text-sky-400"></i> Smart Meter AMI</span>
+        <span class="text-gray-200">·</span>
+        <span class="flex items-center gap-2 text-gray-400 font-bold text-sm whitespace-nowrap"><i data-lucide="bot" class="w-4 h-4 text-rose-DEFAULT"></i> Process Automation</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer class="bg-white border-t border-gray-100 py-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-5">
+
+      <div class="flex items-center gap-3">
+        <svg viewBox="0 0 40 40" class="w-9 h-9 shrink-0" fill="none">
+          <circle cx="20" cy="20" r="19" fill="#FDF0F2" stroke="#F5D6DB" stroke-width="1"/>
+          <path d="M20 8 C15 8 10 12 10 17 C10 23 14 27 18.5 30 C18.5 30 17.5 33 20 34 C22.5 33 21.5 30 21.5 30 C26 27 30 23 30 17 C30 12 25 8 20 8Z" fill="#8B1A2A"/>
+          <path d="M17 30.5 C14.5 29.5 12.5 32 14 34" stroke="#6B7D3A" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M23 30.5 C25.5 29.5 27.5 32 26 34" stroke="#6B7D3A" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="20" y1="34" x2="20" y2="37" stroke="#6B7D3A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <p class="font-bold text-sm text-gray-700">Asset Management Team</p>
+          <p class="text-gray-400 text-xs">City of Santa Rosa · Public Works &amp; Utilities · Water</p>
+        </div>
+      </div>
+
+      <p class="font-hand text-lg text-sky-400 text-center">Building a smarter Santa Rosa — together.</p>
+
+      <!-- Brand dots -->
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded-full bg-rose-DEFAULT" title="#8B1A2A"></div>
+        <div class="w-4 h-4 rounded-full bg-sage-DEFAULT" title="#6B7D3A"></div>
+        <div class="w-4 h-4 rounded-full bg-sky-500" title="#2E8BC0"></div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    lucide.createIcons();
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.10, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
